@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mini C1</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/webmidi@latest/dist/iife/webmidi.iife.js"></script>
+
+    <script type="module" src="./js/main.js"></script>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <button id="start" type="button">Start</button>
+
+    <p id="status" role="status" aria-live="polite"></p>
+
+    <pre id="log" aria-label="Input event log"></pre>
+
+    <div class="container">
+        <div class="panel">
+            <div class="osc-select">
+                <fieldset class="osc">
+                    <legend>Oscillator 1</legend>
+
+                    <label for="oscillator_1">Waveform</label>
+                    <input type="range" id="oscillator_1" min="0" max="3" step="1" value="0">
+                    <output id="oscillator_1_output">Sine</output>
+                    <hr>
+                    <label for="oscillator_1_level">Level</label>
+                    <input type="range" id="oscillator_1_level" min="0" max="1" step="0.01" value="0.3">
+                    <output id="oscillator_1_level_output">0.3</output>
+                </fieldset>
+
+                <fieldset class="osc">
+                    <legend>Oscillator 2</legend>
+
+                    <label for="oscillator_2">Waveform</label>
+                    <input type="range" id="oscillator_2" min="0" max="3" step="1" value="0">
+                    <output id="oscillator_2_output">Sine</output>
+                    <hr>
+                    <label for="oscillator_2_level">Level</label>
+                    <input type="range" id="oscillator_2_level" min="0" max="1" step="0.01" value="0">
+                    <output id="oscillator_2_level_output">0</output>
+                </fieldset>
+
+                <fieldset class="osc">
+                    <legend>Oscillator 3</legend>
+
+                    <label for="oscillator_3">Waveform</label>
+                    <input type="range" id="oscillator_3" min="0" max="3" step="1" value="0">
+                    <output id="oscillator_3_output">Sine</output>
+                    <hr>
+                    <label for="oscillator_3_level">Level</label>
+                    <input type="range" id="oscillator_3_level" min="0" max="1" step="0.01" value="0">
+                    <output id="oscillator_3_level_output">0</output>
+                </fieldset>
+            </div>
+            <div class="osc-select">
+                <fieldset class="osc">
+                    <legend>Oscillator 1</legend>
+
+                    <label for="oscillator_1_fine">Fine tune</label>
+                    <input type="range" id="oscillator_1_fine" min="-100" max="100" step="1" value="0">
+                    <output id="oscillator_1_fine_output">0</output>
+                    <hr>
+                    <label for="oscillator_1_octave">Octave</label>
+                    <input type="range" id="oscillator_1_octave" min="-2" max="2" step="1" value="0">
+                    <output id="oscillator_1_octave_output">0</output>
+                </fieldset>
+
+                <fieldset class="osc">
+                    <legend>Oscillator 2</legend>
+
+                    <label for="oscillator_2_fine">Fine tune</label>
+                    <input type="range" id="oscillator_2_fine" min="-100" max="100" step="1" value="0">
+                    <output id="oscillator_2_fine_output">0</output>
+                    <hr>
+                    <label for="oscillator_2_octave">Octave</label>
+                    <input type="range" id="oscillator_2_octave" min="-2" max="2" step="1" value="0">
+                    <output id="oscillator_2_octave_output">0</output>
+                </fieldset>
+
+                <fieldset class="osc">
+                    <legend>Oscillator 3</legend>
+
+                    <label for="oscillator_3_fine">Fine tune</label>
+                    <input type="range" id="oscillator_3_fine" min="-100" max="100" step="1" value="0">
+                    <output id="oscillator_3_fine_output">0</output>
+                    <hr>
+                    <label for="oscillator_3_octave">Octave</label>
+                    <input type="range" id="oscillator_3_octave" min="-2" max="2" step="1" value="0">
+                    <output id="oscillator_3_octave_output">0</output>
+                </fieldset>
+            </div>
+
+        </div>
+        <div class="piano">
+            <div class="keys">
+                <div class="white key" data-midi="60" data-keyboard="a" data-key="65">
+                    <span>C (a)</span>
+                </div>
+                <div class="black key" data-midi="61" data-keyboard="w" data-key="87">
+                    <span>C# (w)</span>
+                </div>
+            </div>
+            <div class="keys">
+                <div class="white key" data-midi="62" data-keyboard="s" data-key="83">
+                    <span>D (s)</span>
+                </div>
+                <div class="black key" data-midi="63" data-keyboard="e" data-key="69">
+                    <span>D# (e)</span>
+                </div>
+            </div>
+            <div class="keys">
+                <div class="white key" data-midi="64" data-keyboard="d" data-key="68">
+                    <span>E (d)</span>
+                </div>
+            </div>
+            <div class="keys">
+                <div class="white key" data-midi="65" data-keyboard="f" data-key="70">
+                    <span>F (f)</span>
+                </div>
+                <div class="black key" data-midi="66" data-keyboard="t" data-key="84">
+                    <span>F# (t)</span>
+                </div>
+            </div>
+            <div class="keys">
+                <div class="white key" data-midi="67" data-keyboard="g" data-key="71">
+                    <span>G (g)</span>
+                </div>
+                <div class="black key" data-midi="68" data-keyboard="y" data-key="89">
+                    <span>G# (y)</span>
+                </div>
+            </div>
+            <div class="keys">
+                <div class="white key" data-midi="69" data-keyboard="h" data-key="72">
+                    <span>A (h)</span>
+                </div>
+                <div class="black key" data-midi="70" data-keyboard="u" data-key="85">
+                    <span>A# (u)</span>
+                </div>
+            </div>
+            <div class="keys">
+                <div class="white key" data-midi="71" data-keyboard="j" data-key="74">
+                    <span>B (j)</span>
+                </div>
+            </div>
+            <div class="keys">
+                <div class="white key" data-midi="72" data-keyboard="k" data-key="75">
+                    <span>C (k)</span>
+                </div>
+                <div class="black key" data-midi="73" data-keyboard="o" data-key="79">
+                    <span>C# (o)</span>
+                </div>
+            </div>
+            <div class="keys">
+                <div class="white key" data-midi="74" data-keyboard="l" data-key="76">
+                    <span>D (l)</span>
+                </div>
+                <div class="black key" data-midi="75" data-keyboard="p" data-key="80">
+                    <span>D# (p)</span>
+                </div>
+            </div>
+            <div class="keys">
+                <div class="white key" data-midi="76" data-keyboard=";" data-key="186">
+                    <span>E (;)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
