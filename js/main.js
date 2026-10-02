@@ -71,3 +71,11 @@ document.getElementById('start').addEventListener('click', () => {
         synth.setOscParam(`osc${n}.octave`, i);
     });
 });
+
+const glideSlider = document.getElementById('glide');
+const glideReadout = document.getElementById('glide_output');
+glideSlider.addEventListener('input', e => {
+    const i = parseFloat(e.target.value);
+    glideReadout.textContent = i.toFixed(2);
+    synth.setGlide(i);
+})

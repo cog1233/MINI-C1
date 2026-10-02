@@ -1,5 +1,6 @@
 let audioCtx, gainNode, mainGainNode, mixer;
 let heldNotes = [];
+let glideTime = 0;
 
 const oscillators = [
     {
@@ -66,6 +67,24 @@ export function setOscParam(name, value) {
     if (audioCtx) applyOsc(i);
 }
 
+export function setGlide(time) {
+    glideTime = time;
+}
+
+function setPitch(frequency, glideTime) {
+    const t = audioCtx.currentTime;
+    oscillators.forEach(o=> {
+        const f = o.node.frequency;
+        f.cancelScheduledValues(t);
+        f.setValueAtTime(f.value, t);
+        if (glideTime > 0) {
+            f.exponentialRampToValueAtTime(frequency, t + glideTime);
+        } else {
+            f.setValueAtTime(frequency, t);
+        }
+    })
+}
+
 export function noteOn(note) {
     if (!audioCtx) return;
 
@@ -76,8 +95,7 @@ export function noteOn(note) {
 
     const frequency = 440 * Math.pow(2, (note - 69) / 12);
 
-    const t = audioCtx.currentTime;
-    oscillators.forEach(o => o.node.frequency.setValueAtTime(frequency, t));
+    setPitch(frequency, glideTime);
 
     gainNode.gain.setTargetAtTime(1, audioCtx.currentTime, 0.01);
 }
@@ -90,7 +108,7 @@ export function noteOff(note) {
     if (heldNotes.length > 0) {
         const lastNote = heldNotes[heldNotes.length - 1];
         const frequency = 440 * Math.pow(2, (lastNote - 69) / 12);
-        oscillators.forEach(o => o.node.frequency.setValueAtTime(frequency, audioCtx.currentTime));
+        setPitch(frequency, glideTime);
     } else {
         gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.01);
     }
